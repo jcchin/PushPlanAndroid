@@ -2,7 +2,6 @@ package net.pushplan.pushplanandroid.pushplan;
 
 import java.util.Locale;
 
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -20,7 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-public class DemoHuddle extends FragmentActivity implements ActionBar.TabListener {
+public class DemoHuddle extends ActionBarActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -74,21 +73,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-    }
-
+    
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
