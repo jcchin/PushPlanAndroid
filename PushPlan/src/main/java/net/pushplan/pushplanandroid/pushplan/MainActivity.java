@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,8 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity
@@ -46,6 +53,7 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        makeList();
     }
 
     @Override
@@ -151,6 +159,63 @@ public class MainActivity extends ActionBarActivity
         // Do something in response to button
         Intent intent = new Intent(this, DemoHuddle.class);
         startActivity(intent);
+
+    }
+    public void makeList(){
+        final ListView listview = (ListView) findViewById(R.id.listView);
+
+        Huddle huddle;
+
+        ArrayList<Huddle> huddles = new ArrayList<Huddle>();
+
+        huddle = new Huddle();
+        huddle.setName("Lunch Friends");
+        huddle.setDate("1/1/2013");
+        huddles.add(huddle);
+
+        huddle = new Huddle();
+        huddle.setName("Work Buddies");
+        huddle.setDate("1/7/1985");
+        huddles.add(huddle);
+
+        huddle = new Huddle();
+        huddle.setName("Band");
+        huddle.setDate("5/7/2013");
+        huddles.add(huddle);
+
+        huddle = new Huddle();
+        huddle.setName("College Peeps");
+        huddle.setDate("5/2/2014");
+        huddles.add(huddle);
+
+        huddle = new Huddle();
+        huddle.setName("HS Reunion");
+        huddle.setDate("9/6/2013");
+        huddles.add(huddle);
+        Log.v("test", String.valueOf(huddles.get(1).getName()));
+        listview.setAdapter(new DashAdapter(this, huddles));
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view,
+                                    int position, long id) {
+                startHuddle(view);
+                /*
+                final String item = (String) parent.getItemAtPosition(position);
+                view.animate().setDuration(2000).alpha(0)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                list.remove(item);
+                                adapter.notifyDataSetChanged();
+                                view.setAlpha(1);
+                            }
+                        });
+                        */
+            }
+
+        });
 
     }
 
