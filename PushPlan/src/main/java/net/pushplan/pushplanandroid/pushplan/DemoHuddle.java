@@ -44,7 +44,20 @@ public class DemoHuddle extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo_huddle);
 
-
+        //set name of demo activity
+        String huddleName;
+        Bundle extras;
+        if (savedInstanceState == null) {
+            extras = getIntent().getExtras();
+            if(extras == null) {
+                huddleName= "demoHuddle";
+            } else {
+                huddleName= extras.getString("name");
+            }
+        } else {
+            huddleName= (String) savedInstanceState.getSerializable("name");
+        }
+        setTitle(huddleName);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.

@@ -192,30 +192,7 @@ public class MainActivity extends ActionBarActivity
         huddle.setName("HS Reunion");
         huddle.setDate("9/6/2013");
         huddles.add(huddle);
-        Log.v("test", String.valueOf(huddles.get(1).getName()));
         listview.setAdapter(new DashAdapter(this, huddles));
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                                    int position, long id) {
-                startHuddle(view);
-                /*
-                final String item = (String) parent.getItemAtPosition(position);
-                view.animate().setDuration(2000).alpha(0)
-                        .withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                list.remove(item);
-                                adapter.notifyDataSetChanged();
-                                view.setAlpha(1);
-                            }
-                        });
-                        */
-            }
-
-        });
 
     }
 

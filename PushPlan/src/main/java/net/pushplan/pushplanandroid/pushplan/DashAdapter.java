@@ -1,11 +1,14 @@
 package net.pushplan.pushplanandroid.pushplan;
 
+
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TwoLineListItem;
 
@@ -39,24 +42,58 @@ class DashAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        TwoLineListItem twoLineListItem;
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
-        if (convertView == null) {
+        View view = convertView;
+
+        if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            twoLineListItem = (TwoLineListItem) inflater.inflate(
-                    android.R.layout.simple_list_item_2, null);
-        } else {
-            twoLineListItem = (TwoLineListItem) convertView;
+            view = inflater.inflate(R.layout.dash_list, null);
         }
 
-        TextView text1 = twoLineListItem.getText1();
-        TextView text2 = twoLineListItem.getText2();
+        TextView listItemText = (TextView)view.findViewById(R.id.list_item_string);
+        listItemText.setText(huddles.get(position).getName());
 
-        text1.setText(huddles.get(position).getName());
-        text2.setText(huddles.get(position).getDate());
+        //Handle buttons and add onClickListeners
+        Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
 
-        return twoLineListItem;
+        view.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //do something
+                startHuddle(v,huddles.get(position).getName() );
+                //huddles.remove(position); //or some other task
+                //notifyDataSetChanged();
+            }
+        });
+
+        final View finalView = view;
+        deleteBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //do something
+                finalView.animate().setDuration(500).alpha(0)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                huddles.remove(position);
+                                notifyDataSetChanged();
+                                finalView.setAlpha(1);
+                            }
+                        });
+                //huddles.remove(position); //or some other task
+                //notifyDataSetChanged();
+            }
+        });
+
+        return view;
+    }
+    public void startHuddle(View view, String name) {
+        // Do something in response to button
+        Intent intent = new Intent(context, DemoHuddle.class);
+        intent.putExtra("name",name);
+        context.startActivity(intent);
+
     }
 }
