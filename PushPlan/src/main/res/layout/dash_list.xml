@@ -29,17 +29,18 @@
                 android:paddingLeft="8dp"
                 android:textSize="18sp"/>
             <TextView
-                android:text="ideas:2 "
+                android:text="ideas:0 "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
                 android:textSize="18sp"/>
             <TextView
-                android:text="chats:0"
+                android:text="chats:2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textColor="#FF0000" />
         </LinearLayout>
     </LinearLayout>
     <Button

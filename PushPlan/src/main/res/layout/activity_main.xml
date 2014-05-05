@@ -14,12 +14,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <ListView
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="30sp">
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView"
+                android:layout_gravity="center"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="50sp" />
+            <RelativeLayout
+                android:id="@+id/InnerRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" >
+
+                <Button
+                    android:text="+"
+                    android:id="@+id/Button"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Button>
+
+                <EditText
+                    android:id="@+id/EditText"
+                    android:layout_width="fill_parent"
+                    android:layout_toLeftOf="@id/Button"
+                    android:layout_height="wrap_content"
+                    android:hint="Start a new group!"
+                    android:layout_alignParentBottom="false">
+                </EditText>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"
-            android:layout_gravity="center" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Dashboard"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal|top"
+            android:textSize="24sp" />
     </FrameLayout>
+
 
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
          this as a sliding drawer on the left side for left-to-right

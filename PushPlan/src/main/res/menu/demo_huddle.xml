@@ -2,6 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="net.pushplan.pushplanandroid.pushplan.DemoHuddle" >
+    <item android:id="@+id/action_example"
+        android:title="@string/action_huddle_details"
+        app:showAsAction="withText|ifRoom" />
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
