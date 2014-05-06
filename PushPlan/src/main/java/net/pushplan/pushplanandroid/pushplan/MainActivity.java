@@ -1,7 +1,12 @@
 package net.pushplan.pushplanandroid.pushplan;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -19,7 +24,9 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -54,6 +61,7 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         makeList();
+        setupNotify(savedInstanceState);
     }
 
     @Override
@@ -195,5 +203,70 @@ public class MainActivity extends ActionBarActivity
         listview.setAdapter(new DashAdapter(this, huddles));
 
     }
+    protected void setupNotify(Bundle savedInstanceState){
+        // Notification ID to allow for future updates
+        final int MY_NOTIFICATION_ID = 1;
 
+        // Notification Count
+        final int[] mNotificationCount = {0};
+
+        // Notification Text Elements
+        final CharSequence tickerText = "This is a Really, Really, Super Long Notification Message!";
+        final CharSequence contentTitle = "Notification";
+        final CharSequence contentText = "You've Been Notified!";
+
+        // Notification Action Elements
+        Intent mNotificationIntent;
+        final PendingIntent mContentIntent;
+
+        // Notification Sound and Vibration on Arrival
+        final Uri soundURI = Uri
+                .parse("android.resource://net.pushplan.pushplanandroid.pushplan/"
+                        + R.raw.click_on);
+        final long[] mVibratePattern = { 0, 200, 200, 300 };
+
+        final RemoteViews mContentView = new RemoteViews(
+                "net.pushplan.pushplanandroid.pushplan",
+                R.layout.custom_notification);
+
+        mNotificationIntent = new Intent(getApplicationContext(),
+                DemoHuddle.class);
+        mContentIntent = PendingIntent.getActivity(getApplicationContext(), 0,
+                mNotificationIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        final Button button = (Button) findViewById(R.id.Button);
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View v) {
+
+                // Define the Notification's expanded message and Intent:
+
+                mContentView.setTextViewText(R.id.text, contentText + " ("
+                        + ++mNotificationCount[0] + ")");
+
+                // Build the Notification
+
+                Notification.Builder notificationBuilder = new Notification.Builder(
+                        getApplicationContext())
+                        .setTicker(tickerText)
+                        .setSmallIcon(R.drawable.pushplan_logo48)
+                        .setAutoCancel(true)
+                        .setContentIntent(mContentIntent)
+                        .setSound(soundURI)
+                        .setVibrate(mVibratePattern)
+                        .setContent(mContentView);
+
+                // Pass the Notification to the NotificationManager:
+                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(MY_NOTIFICATION_ID,
+                        notificationBuilder.build());
+
+            }
+        });
+
+
+    }
 }
+
