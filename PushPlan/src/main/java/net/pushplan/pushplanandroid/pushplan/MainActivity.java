@@ -6,7 +6,9 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,8 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -213,11 +217,16 @@ public class MainActivity extends ActionBarActivity
         // Notification Text Elements
         final CharSequence tickerText = "This is a Really, Really, Super Long Notification Message!";
         final CharSequence contentTitle = "Notification";
-        final CharSequence contentText = "You've Been Notified!";
+        final CharSequence contentText = "Lunch Friends: ";
 
         // Notification Action Elements
         Intent mNotificationIntent;
         final PendingIntent mContentIntent;
+
+        final SpannableStringBuilder exampleItem = new SpannableStringBuilder();
+        exampleItem.append("Dummy");
+        exampleItem.setSpan(new ForegroundColorSpan(Color.WHITE), 0, exampleItem.length(), 0);
+        exampleItem.append("   Example content");
 
         // Notification Sound and Vibration on Arrival
         final Uri soundURI = Uri
@@ -248,14 +257,35 @@ public class MainActivity extends ActionBarActivity
 
                 // Build the Notification
 
-                Notification.Builder notificationBuilder = new Notification.Builder(
+                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(
                         getApplicationContext())
+                        // Set appropriate defaults for the notification light, sound,
+                        // and vibration.
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        // Use a default priority (recognized on devices running Android
+                        // 4.1 or later)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        // Show a number. This is useful when stacking notifications of
+                        // a single type.
+                        .setNumber(1)
+                        .setContentTitle("test1")
                         .setTicker(tickerText)
                         .setSmallIcon(R.drawable.pushplan_logo48)
                         .setAutoCancel(true)
                         .setContentIntent(mContentIntent)
                         .setSound(soundURI)
                         .setVibrate(mVibratePattern)
+                        // Show an expanded list of items on devices running Android 4.1
+                        // or later.
+                        .setStyle(new NotificationCompat.InboxStyle()
+                                .addLine("1")
+                                .addLine("2")
+                                .addLine(exampleItem)
+                                .addLine(exampleItem)
+                                .setBigContentTitle("dummy Title")
+
+                                .setSummaryText("Dummy summary text"))
+
                         .setContent(mContentView);
 
                 // Pass the Notification to the NotificationManager:
@@ -264,6 +294,7 @@ public class MainActivity extends ActionBarActivity
                         notificationBuilder.build());
 
             }
+
         });
 
 

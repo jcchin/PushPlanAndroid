@@ -14,11 +14,44 @@
         android:contentDescription="Eye"
         android:src="@drawable/pushplan_logo" />
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="+3 more notifications"
+            android:id="@+id/textView" />
+
+    </LinearLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FFF"
-        android:textSize="24sp" />
+        android:text="Yes"
+        android:id="@+id/buttonyes"
+        android:singleLine="false" />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meh"
+        android:id="@+id/buttonmeh" />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No"
+        android:id="@+id/buttonno" />
 
 </LinearLayout>
