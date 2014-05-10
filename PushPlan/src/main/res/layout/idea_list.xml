@@ -15,7 +15,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#000000" />
 
         </RelativeLayout>
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,7 +24,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="score:2"
+                android:text="score:2 "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
@@ -33,31 +34,38 @@
                 android:id="@+id/yes_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:layout_alignParentRight="true"
-                android:text="Yes" />
+                android:background="@drawable/yes_button"
+                android:text="Yes"
+                android:textColor="#000000" />
             <Button
                 android:id="@+id/meh_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:layout_alignParentRight="true"
-                android:text="meh" />
+                android:text="meh"
+                android:background="@drawable/meh_button"
+                android:textColor="#000000"/>
             <Button
                 android:id="@+id/No_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:layout_alignParentRight="true"
-                android:text="No" />
+                android:text="No"
+                android:background="@drawable/no_button"
+                android:textColor="#000000"/>
         </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/delete_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginRight="1dp"
         android:layout_alignParentRight="true"
-        android:text="x" />
+        android:text="x"
+        android:background="@drawable/delete_button"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:textColor="#000000" />
 </RelativeLayout>
