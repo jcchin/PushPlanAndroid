@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
@@ -29,6 +30,11 @@ import android.widget.TextView;
 
 public class DemoHuddle extends FragmentActivity implements ActionBar.TabListener, android.app.ActionBar.TabListener {
 
+    private static Context context;
+
+    public static Context getAppContext() {
+        return DemoHuddle.context;
+    }
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
      * three primary sections of the app. We use a {@link android.support.v4.app.FragmentPagerAdapter}
@@ -48,6 +54,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo_huddle);
 
+        DemoHuddle.context = getApplicationContext();
         //set name of demo activity
         String huddleName;
         Bundle extras;
@@ -139,7 +146,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the primary
      * sections of the app.
      */
-    public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
+    public static class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
         public AppSectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -190,7 +197,8 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         /**
          * A fragment that launches other parts of the demo application.
          */
-        public class LaunchpadSectionFragment extends Fragment {
+        public static class LaunchpadSectionFragment extends Fragment {
+            public LaunchpadSectionFragment(){}
 
             @Override
             public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -230,7 +238,8 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         /**
          * A fragment that launches other parts of the demo application.
          */
-        public class AddPollFragment extends Fragment {
+        public static class AddPollFragment extends Fragment {
+            public AddPollFragment(){}
 
             @Override
             public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -243,7 +252,8 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         /**
          * A dummy fragment representing a section of the app, but that simply displays dummy text.
          */
-        public class DummySectionFragment extends Fragment {
+        public static class DummySectionFragment extends Fragment {
+            public DummySectionFragment(){}
 
             public static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -262,7 +272,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
             public void onActivityCreated(Bundle savedInstanceState) {
                 super.onActivityCreated(savedInstanceState);
 
-                final ListView listview = (ListView) findViewById(android.R.id.list);
+                final ListView listview = (ListView) getActivity().findViewById(android.R.id.list);
 
                 Idea idea;
 
@@ -292,7 +302,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
                 idea.setName("HS Reunion");
                 idea.setDate("9/6/2013");
                 ideas.add(idea);
-                listview.setAdapter(new IdeaAdapter(getApplicationContext(), ideas));
+                listview.setAdapter(new IdeaAdapter(getAppContext(), ideas));
 
             }
 
