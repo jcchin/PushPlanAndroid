@@ -3,8 +3,10 @@ package net.pushplan.pushplanandroid.pushplan;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -136,7 +139,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the primary
      * sections of the app.
      */
-    public static class AppSectionsPagerAdapter extends FragmentPagerAdapter {
+    public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
         public AppSectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -187,7 +190,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         /**
          * A fragment that launches other parts of the demo application.
          */
-        public static class LaunchpadSectionFragment extends Fragment {
+        public class LaunchpadSectionFragment extends Fragment {
 
             @Override
             public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -227,7 +230,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         /**
          * A fragment that launches other parts of the demo application.
          */
-        public static class AddPollFragment extends Fragment {
+        public class AddPollFragment extends Fragment {
 
             @Override
             public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -240,7 +243,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         /**
          * A dummy fragment representing a section of the app, but that simply displays dummy text.
          */
-        public static class DummySectionFragment extends Fragment {
+        public class DummySectionFragment extends Fragment {
 
             public static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -251,10 +254,52 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
                 //Bundle args = getArguments();
                 //((TextView) rootView.findViewById(android.R.id.text1)).setText(
                 //        getString(R.string.dummy_section_text, args.getInt(ARG_SECTION_NUMBER)));
+
                 return rootView;
             }
+
+            @Override
+            public void onActivityCreated(Bundle savedInstanceState) {
+                super.onActivityCreated(savedInstanceState);
+
+                final ListView listview = (ListView) findViewById(android.R.id.list);
+
+                Idea idea;
+
+                ArrayList<Idea> ideas = new ArrayList<Idea>();
+
+                idea = new Idea();
+                idea.setName("Lunch Friends");
+                idea.setDate("1/1/2013");
+                ideas.add(idea);
+
+                idea = new Idea();
+                idea.setName("Work Buddies");
+                idea.setDate("1/7/1985");
+                ideas.add(idea);
+
+                idea = new Idea();
+                idea.setName("Band");
+                idea.setDate("5/7/2013");
+                ideas.add(idea);
+
+                idea = new Idea();
+                idea.setName("College Peeps");
+                idea.setDate("5/2/2014");
+                ideas.add(idea);
+
+                idea = new Idea();
+                idea.setName("HS Reunion");
+                idea.setDate("9/6/2013");
+                ideas.add(idea);
+                listview.setAdapter(new IdeaAdapter(getApplicationContext(), ideas));
+
+            }
+
         }
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

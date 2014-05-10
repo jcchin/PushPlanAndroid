@@ -22,7 +22,8 @@
         <activity
             android:name="net.pushplan.pushplanandroid.pushplan.DemoHuddle"
             android:label="@string/title_activity_demo_huddle"
-            android:parentActivityName="net.pushplan.pushplanandroid.pushplan.MainActivity" >
+            android:parentActivityName="net.pushplan.pushplanandroid.pushplan.MainActivity"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
