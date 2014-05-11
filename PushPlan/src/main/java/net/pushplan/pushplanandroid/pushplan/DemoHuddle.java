@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -307,27 +308,27 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
                 ArrayList<Idea> ideas = new ArrayList<Idea>();
 
                 idea = new Idea();
-                idea.setName("Lunch Friends");
+                idea.setName("Presto");
                 idea.setDate("1/1/2013");
                 ideas.add(idea);
 
                 idea = new Idea();
-                idea.setName("Work Buddies");
+                idea.setName("Pizza Bogo");
                 idea.setDate("1/7/1985");
                 ideas.add(idea);
 
                 idea = new Idea();
-                idea.setName("Band");
+                idea.setName("Cyclone Pita");
                 idea.setDate("5/7/2013");
                 ideas.add(idea);
 
                 idea = new Idea();
-                idea.setName("College Peeps");
+                idea.setName("Panera");
                 idea.setDate("5/2/2014");
                 ideas.add(idea);
 
                 idea = new Idea();
-                idea.setName("HS Reunion");
+                idea.setName("Brown Bag Burgers");
                 idea.setDate("9/6/2013");
                 ideas.add(idea);
                 listview.setAdapter(new IdeaAdapter(getAppContext(), ideas));
@@ -352,6 +353,8 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+
+            openSettings();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -428,6 +431,12 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
             View rootView = inflater.inflate(R.layout.fragment_demo_huddle, container, false);
             return rootView;
         }
+    }
+    public void openSettings() {
+        // Do something in response to button
+        Intent intent = new Intent(this, PushSettings.class);
+        startActivity(intent);
+
     }
 
 }

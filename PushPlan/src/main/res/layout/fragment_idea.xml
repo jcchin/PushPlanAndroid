@@ -10,7 +10,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Sample Idea Poll"
         android:id="@+id/text1"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp" />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

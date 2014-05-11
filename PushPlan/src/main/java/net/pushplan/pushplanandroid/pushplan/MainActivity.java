@@ -119,6 +119,7 @@ public class MainActivity extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            openSettings();
             return true;
         }
         if (id == R.id.action_sign_out) {
@@ -297,6 +298,12 @@ public class MainActivity extends ActionBarActivity
 
         });
 
+
+    }
+    public void openSettings() {
+        // Do something in response to button
+        Intent intent = new Intent(this, PushSettings.class);
+        startActivity(intent);
 
     }
 }
