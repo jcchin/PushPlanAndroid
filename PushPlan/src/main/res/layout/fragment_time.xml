@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.pushplan.pushplanandroid.pushplan.TimeFragment">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select a time" />
+
+        <TableLayout
+            android:id="@+id/header"
+            android:layout_width="fill_parent"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black">
+            <TableRow>
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:layout_margin="1dp"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="#ffcccccc"
+                    android:text="Time" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_margin="1dp"
+                    android:background="@android:color/white"
+                    android:text="Mon 5/5" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_margin="1dp"
+                    android:background="@android:color/white"
+                    android:text="Tues 5/6" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_margin="1dp"
+                    android:background="@android:color/white"
+                    android:text="Wed 5/7" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_margin="1dp"
+                    android:background="@android:color/white"
+                    android:text="Thur 5/8" />
+            </TableRow>
+        </TableLayout>
+        <ScrollView
+            android:id="@+id/table_scroll"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp">
+            <TableLayout
+                android:id="@+id/maintable"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/black">
+                <TableRow>
+                    <TextView
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginLeft="1dp"
+                        android:text="Col1" />
+                    <TextView
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:text="Col2" />
+                    <TextView
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:text="Col3" />
+                    <TextView
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:text="Col4" />
+                    <TextView
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:text="Col5" />
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

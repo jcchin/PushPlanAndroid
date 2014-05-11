@@ -3,12 +3,8 @@ package net.pushplan.pushplanandroid.pushplan;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.ListFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,16 +12,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Spinner;
 
 
 public class DemoHuddle extends FragmentActivity implements ActionBar.TabListener, android.app.ActionBar.TabListener {
@@ -157,11 +151,14 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
             if ((getCount()-1) == i){
                 return new AddPollFragment();
             }
+            if ((getCount()-2) == i){
+                return new TimeFragment();
+            }
             switch (i) {
                 case 0:
                     // The first section of the app is the most interesting -- it offers
                     // a launchpad into the other demonstrations in this example application.
-                    return new LaunchpadSectionFragment();
+                    return new ChatFragment();
 
                 default:
                     // The other sections of the app are dummy placeholders.
@@ -175,7 +172,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -188,6 +185,8 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
                     return "Group Chat";
                 case 1:
                     return "Ideas";
+                case 2:
+                    return "Times";
                 default:
                     return "...";
             }
@@ -197,13 +196,13 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         /**
          * A fragment that launches other parts of the demo application.
          */
-        public static class LaunchpadSectionFragment extends Fragment {
-            public LaunchpadSectionFragment(){}
+        public static class ChatFragment extends Fragment {
+            public ChatFragment(){}
 
             @Override
             public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                      Bundle savedInstanceState) {
-                View rootView = inflater.inflate(R.layout.fragment_section_launchpad, container, false);
+                View rootView = inflater.inflate(R.layout.fragment_chat, container, false);
                 /*
                 // Demonstration of a collection-browsing activity.
                 rootView.findViewById(R.id.demo_collection_button)
@@ -248,6 +247,35 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
 
                 return rootView;
             }
+
+            @Override
+            public void onActivityCreated(Bundle savedInstanceState){
+                super.onActivityCreated(savedInstanceState);
+                Spinner spinner = (Spinner) getActivity().findViewById(R.id.spinner);
+                // Create an ArrayAdapter using the string array and a default spinner layout
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getAppContext(),
+                        R.array.poll_array, R.layout.simple_spinner_item);
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+                // Apply the adapter to the spinner
+                spinner.setAdapter(adapter);
+            }
+        }
+        /**
+         * A fragment that launches other parts of the demo application.
+         */
+        public static class TimeFragment extends Fragment {
+            public TimeFragment(){}
+
+            @Override
+            public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                     Bundle savedInstanceState) {
+                View rootView = inflater.inflate(R.layout.fragment_time, container, false);
+
+                return rootView;
+            }
+
+
         }
         /**
          * A dummy fragment representing a section of the app, but that simply displays dummy text.
@@ -260,7 +288,7 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
             @Override
             public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                      Bundle savedInstanceState) {
-                View rootView = inflater.inflate(R.layout.fragment_section_dummy, container, false);
+                View rootView = inflater.inflate(R.layout.fragment_idea, container, false);
                 //Bundle args = getArguments();
                 //((TextView) rootView.findViewById(android.R.id.text1)).setText(
                 //        getString(R.string.dummy_section_text, args.getInt(ARG_SECTION_NUMBER)));

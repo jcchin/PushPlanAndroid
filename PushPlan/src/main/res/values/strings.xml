@@ -14,5 +14,12 @@
     <string name="title_activity_demo_huddle">DemoHuddle</string>
     <string name="hello_world">Hello world!</string>
     <string name="dummy_section_text">Hello world!</string>
-
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="poll_array">
+        <item>Idea</item>
+        <item>Time</item>
+        <item>Rowing</item>
+        <item>Potluck</item>
+        <item>Sports</item>
+    </string-array>
 </resources>
