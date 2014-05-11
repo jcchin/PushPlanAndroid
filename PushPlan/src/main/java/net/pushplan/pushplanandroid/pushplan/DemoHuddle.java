@@ -6,6 +6,7 @@ import java.util.Locale;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +24,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 
 public class DemoHuddle extends FragmentActivity implements ActionBar.TabListener, android.app.ActionBar.TabListener {
@@ -72,9 +78,11 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         // Set up the action bar.
         final android.app.ActionBar actionBar = getActionBar();
 
-        // Specify that the Home/Up button should not be enabled, since there is no hierarchical
+        // Specify that the Home/Up button should be enabled, to hierarchical
         // parent.
-        //actionBar.setHomeButtonEnabled(false);
+        //actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         // Specify that we will be displaying tabs in the action bar.
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -273,10 +281,85 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
                                      Bundle savedInstanceState) {
                 View rootView = inflater.inflate(R.layout.fragment_time, container, false);
 
+
                 return rootView;
             }
 
+            @Override
+            public void onActivityCreated(Bundle savedInstanceState) {
+                super.onActivityCreated(savedInstanceState);
 
+                TableLayout time_table;
+                time_table=(TableLayout)getActivity().findViewById(R.id.maintable);
+                TableRow row;
+                TextView t1, t2, t3, t4, t5;
+                //Converting to dip unit
+                int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                        (float) 1, getResources().getDisplayMetrics());
+
+                for (int current = 0; current < TimeList.times.length; current++) {
+                    row = new TableRow(getAppContext());
+
+                    t1 = new TextView(getAppContext());
+                    t1.setTextColor(getResources().getColor(R.color.black));
+                    t2 = new TextView(getAppContext());
+                    t2.setTextColor(getResources().getColor(R.color.black));
+                    t2 = new TextView(getAppContext());
+                    t2.setTextColor(getResources().getColor(R.color.black));
+                    t3 = new TextView(getAppContext());
+                    t3.setTextColor(getResources().getColor(R.color.black));
+                    t4 = new TextView(getAppContext());
+                    t4.setTextColor(getResources().getColor(R.color.black));
+                    t5 = new TextView(getAppContext());
+                    t5.setTextColor(getResources().getColor(R.color.black));
+
+                    t1.setText(TimeList.times[current]);
+                    t2.setText(TimeList.times[current]);
+                    t3.setText(TimeList.times[current]);
+                    t4.setText(TimeList.times[current]);
+                    t5.setText(TimeList.times[current]);
+                    //t2.setText(TimeList.countries[current]);
+
+                    t1.setTypeface(null, 1);
+                    t2.setTypeface(null, 1);
+                    t3.setTypeface(null, 1);
+                    t4.setTypeface(null, 1);
+                    t5.setTypeface(null, 1);
+
+                    t1.setTextSize(15);
+                    t2.setTextSize(15);
+                    t3.setTextSize(15);
+                    t4.setTextSize(15);
+                    t5.setTextSize(15);
+
+                    t1.setWidth(70 * dip);
+                    t2.setWidth(70 * dip);
+                    t3.setWidth(70 * dip);
+                    t4.setWidth(70 * dip);
+                    t5.setWidth(70 * dip);
+                    t1.setHeight(50 * dip);
+                    t2.setHeight(50 * dip);
+                    t3.setHeight(50 * dip);
+                    t4.setHeight(50 * dip);
+                    t5.setHeight(50 * dip);
+                    t1.setPadding(10*dip, 0, 0, 0);
+                    t2.setPadding(15*dip, 0, 0, 0);
+                    t3.setPadding(25*dip, 0, 0, 0);
+                    t4.setPadding(25*dip, 0, 0, 0);
+                    t5.setPadding(25*dip, 0, 0, 0);
+
+                    row.addView(t1);
+                    row.addView(t2);
+                    row.addView(t3);
+                    row.addView(t4);
+                    row.addView(t5);
+
+                    time_table.addView(row, new TableLayout.LayoutParams(
+                            TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+
+                }
+
+            }
         }
         /**
          * A dummy fragment representing a section of the app, but that simply displays dummy text.
@@ -352,8 +435,11 @@ public class DemoHuddle extends FragmentActivity implements ActionBar.TabListene
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if (id == android.R.id.home){ //necessary for API 14 only
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
+        }
         if (id == R.id.action_settings) {
-
             openSettings();
             return true;
         }

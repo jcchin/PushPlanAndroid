@@ -26,7 +26,7 @@
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
+                android:value="net.pushplan.pushplanandroid.pushplan.MainActivity" />
         </activity>
         <activity
             android:name="net.pushplan.pushplanandroid.pushplan.PushSettings"
@@ -34,7 +34,7 @@
             android:parentActivityName="net.pushplan.pushplanandroid.pushplan.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
+                android:value="net.pushplan.pushplanandroid.pushplan.MainActivity" />
         </activity>
     </application>
 

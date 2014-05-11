@@ -1,7 +1,10 @@
 package net.pushplan.pushplanandroid.pushplan;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,15 +75,25 @@ public class IdeaAdapter extends BaseAdapter {
             public void onClick(View v) {
                 //do something
 
-                finalView.animate().setDuration(500).alpha(0)
-                        .withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                ideas.remove(position);
-                                notifyDataSetChanged();
-                                finalView.setAlpha(1);
-                            }
-                        });
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    finalView.animate().setDuration(500).alpha(0).setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            ideas.remove(position);
+                            notifyDataSetChanged();
+                            finalView.setAlpha(1);
+                        }
+                    });
+                } else {
+                    finalView.animate().setDuration(500).alpha(0).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            ideas.remove(position);
+                            notifyDataSetChanged();
+                            finalView.setAlpha(1);
+                        }
+                    });
+                }
                 //huddles.remove(position); //or some other task
                 //notifyDataSetChanged();
 
