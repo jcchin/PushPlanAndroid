@@ -29,5 +29,13 @@
         android:entryValues="@array/pref_example_list_values"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null" />
+    <ListPreference
+        android:key="example_list2"
+        android:title="@string/pref_time_view"
+        android:defaultValue="-1"
+        android:entries="@array/pref_example_list_time_view"
+        android:entryValues="@array/pref_example_list_values"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
 
 </PreferenceScreen>
